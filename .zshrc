@@ -28,3 +28,10 @@ zstyle ':completion:*:default' menu select=1
 # ここではデフォルトのセットから / を抜いたものとする
 # こうすると、 Ctrl-W でカーソル前の1単語を削除したとき、 / までで削除が止まる
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+alias ll="ls -al"
+alias rm="rm -i"
+
+
+# git補完
+zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh

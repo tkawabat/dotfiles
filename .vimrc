@@ -51,4 +51,4 @@ set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 noremap <C-e> :tabedit 
-noremap <C-n> :tabnext 
+noremap <C-a> :tabnext

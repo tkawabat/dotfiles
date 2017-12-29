@@ -51,6 +51,21 @@ $ git config --global user.name "tkawabat"
 $ git config --global user.email tosiki.kawabata@gmail.com
 ```
 
+* 補完
+
+    * スクリプトファイル取得
+
+    ```
+    $ wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+    $ mv {,.}git-completion.zsh
+    ```
+
+    * .zshrcに追加
+
+    ```
+    zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
+    ```
+
 ## vim
 * .vimrcかきかき
 
