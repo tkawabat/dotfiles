@@ -49,6 +49,8 @@ $ sudo yum install git
 ```
 $ git config --global user.name "tkawabat"
 $ git config --global user.email tosiki.kawabata@gmail.com
+$ git config --global alias.st status
+$ git config --global alias.co commit
 ```
 
 * 補完
