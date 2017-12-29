@@ -1,3 +1,6 @@
 [user]
 	name = tkawabat
 	email = tosiki.kawabata@gmail.com
+[alias]
+	st = status
+	co = commit
