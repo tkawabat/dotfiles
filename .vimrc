@@ -50,5 +50,6 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-noremap <C-e> :tabedit 
-noremap <C-a> :tabnext
+noremap <C-f> :vsp 
+noremap <C-e> :tabe 
+noremap <C-a> :tabn

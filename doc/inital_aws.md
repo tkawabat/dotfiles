@@ -33,6 +33,13 @@ $ sudo passwd root
 
     * puttyで新たなセッションを開いて動作確認
 
+* 時間設定
+
+```
+$ sudo cp /etc/localtime /etc/localtime.bak
+$ sudo cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+```
+
 
 ## Git
 * install
@@ -80,4 +87,11 @@ $ git config --global alias.co commit
 $ yum install zsh
 $ cat /etc/shell
 $ chsh -s zsh
+```
+
+## node
+
+```
+$ sudo yum install gcc-c++
+$ 
 ```
