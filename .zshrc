@@ -4,6 +4,9 @@ bindkey -e
 # 自動保管
 autoload -U compinit; compinit
 
+# プロンプト
+PROMPT='%~$ '
+
 # cdしたらディレクトリスタックに追加
 setopt auto_pushd
 
