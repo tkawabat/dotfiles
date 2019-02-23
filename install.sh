@@ -2,14 +2,16 @@
 
 for F in .??*
 do
-    [[ "$F" == ".git" ]] && continue
-    [[ "$F" == ".gitignore" ]] && continue
-    [[ "$F" == ".DS_Store" ]] && continue
+    if [ "$F" = ".git" ]; then continue; fi
+    if [ "$F" = ".gitignore" ]; then continue; fi
+    if [ "$F" = ".DS_Store" ]; then continue; fi
 
-    [[ -e ~/$F ]] && continue
-    echo "create $F"
-    ln -s `pwd`/$F ~/$F
+    if [ ! -e ~/$F ]; then 
+        echo "create $F"
+        ln -s `pwd`/$F ~/$F
+    fi
 done
 
-[[ ! -e ~/local ]] && mkdir ~/local
-[[ ! -e ~/pkg ]] && mkdir ~/pkg
+if [ ! -e ~/local ]; then mkdir ~/local; fi
+if [ ! -e ~/pkg ]; then mkdir ~/pkg; fi
+if [ ! -e ~/.vim/bundle ]; then mkdir -p ~/.vim/bundle && git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim; fi
