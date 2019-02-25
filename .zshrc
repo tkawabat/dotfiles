@@ -37,6 +37,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 alias ll="ls -al"
 alias rm="rm -i"
+alias svim="sudo vim"
 
 
 # git補完

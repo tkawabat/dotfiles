@@ -4,3 +4,4 @@
 [alias]
 	st = status
 	co = commit
+	ch = checkout
