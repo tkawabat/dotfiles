@@ -47,3 +47,5 @@ export PATH=${HOME}/local/bin/:${PATH}
 
 # tmux用にlibeventのパスを教える
 export LD_LIBRARY_PATH=${HOME}/local/lib:$LD_LIBRARY_PATH
+
+if [ -e ~/.local_zsh_rc ]; then source ~/.local_zsh_rc; fi
