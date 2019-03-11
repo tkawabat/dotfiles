@@ -54,6 +54,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 noremap <C-f> :vsp 
 noremap <C-e> :tabe 
 noremap <C-a> :tabn
+inoremap <C-J> console.log(
 
 " NeoBundle
 " bundleで管理するディレクトリを指定
