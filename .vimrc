@@ -55,6 +55,7 @@ noremap <C-f> :vsp
 noremap <C-e> :tabe 
 noremap <C-a> :tabn
 inoremap <C-J> console.log(
+inoremap <C-x> process.exit();
 
 " NeoBundle
 " bundleで管理するディレクトリを指定

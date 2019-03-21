@@ -11,5 +11,9 @@ $ sudo apt-get install letsencrypt
 $ ss -antu
 $ sudo apachectl stop
 
+# lightsailだと勝手に起動するのでいかがいいかも？
+$ sudo /opt/bitnami/ctlscript.sh stop
+
+
 $ sudo letsencrypt certonly --standalone -d hoge.example.com
 ```

@@ -5,3 +5,7 @@
 	st = status
 	co = commit
 	ch = checkout
+	br = branch
+	pr = pull --rebase
+[core]
+	editor = vim
