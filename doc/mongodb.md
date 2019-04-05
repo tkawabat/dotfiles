@@ -9,3 +9,15 @@ $ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mong
 $ sudo apt update
 $ sudo apt install mongodb-org
 ```
+
+* export
+
+```
+$ mongoexport --host random-matching-free-0-shard-0/random-matching-free-0-shard-00-00-hkex0.mongodb.net:27017,random-matching-free-0-shard-00-01-hkex0.mongodb.net:27017,random-matching-free-0-shard-00-02-hkex0.mongodb.net:27017 --ssl --username admin --authenticationDatabase admin --db random_matching_test --collection=users --out users_`date "+%Y%m%d_%H%M%S"`.txt
+```
+
+* import
+
+```
+$ mongoimport --host random-matching-free-0-shard-0/random-matching-free-0-shard-00-00-hkex0.mongodb.net:27017,random-matching-free-0-shard-00-01-hkex0.mongodb.net:27017,random-matching-free-0-shard-00-02-hkex0.mongodb.net:27017 --ssl --username admin --authenticationDatabase admin --db random_matching_test --collection users --file users_hogehoge.txt
+```

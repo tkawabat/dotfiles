@@ -38,6 +38,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 alias ll="ls -al"
 alias rm="rm -i"
 alias svim="sudo vim"
+alias jgrep='grep -R --exclude="*min.js" --exclude="package*json" --exclude-dir="node_modules"'
 
 
 # git補完
