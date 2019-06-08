@@ -54,8 +54,9 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 noremap <C-f> :vsp 
 noremap <C-e> :tabe 
 noremap <C-a> :tabn
-inoremap <C-J> console.log(
-inoremap <C-x> process.exit();
+inoremap <C-j><C-l> console.log(
+inoremap <C-j><C-o> JSON.parse(JSON.stringify())<Esc>hi
+inoremap <C-j><C-x> process.exit();
 
 " NeoBundle
 " bundleで管理するディレクトリを指定
