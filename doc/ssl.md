@@ -17,3 +17,13 @@ $ sudo /opt/bitnami/ctlscript.sh stop
 
 $ sudo letsencrypt certonly --standalone -d hoge.example.com
 ```
+
+* きまぐれ用コマンド
+
+```
+# いらないかも？
+$ sudo apachectl stop
+
+$ cd <リポジトリroot>
+$ sudo pm2 stop pm2.json --only prod && sudo letsencrypt certonly --standalone -d random-matching.tokyo && sudo pm2 start pm2.json --only prod
+```

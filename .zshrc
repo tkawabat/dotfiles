@@ -2,7 +2,10 @@
 bindkey -e
 
 # 自動保管
-autoload -U compinit; compinit
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+autoload -Uz compinit; compinit -u
 
 # プロンプト
 PROMPT='%~$ '
@@ -42,7 +45,8 @@ alias jgrep='grep -R --exclude-dir=".git" --exclude-dir="log" --exclude="*.min.*
 
 
 # git補完
-zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
+## macで不具合が起きたのでコメントアウト
+#zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
 
 export PATH=${HOME}/local/bin/:${PATH}
 
