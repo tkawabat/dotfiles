@@ -21,3 +21,15 @@
 * android
     * android/app/src/main/res/values/strings.xml のapp_nameを書き換える
 
+## react-native-gesture-handlerで詰まった問題
+* なんかiosのビルドでエラーになった
+* 解決手順
+    * PodFileからreact-native-gesture-handlerの記述を全部消す
+    * pod update
+    * react-native link
+        * PodFileから消えていることを確認
+    * Xcodeでclean build folder
+    * もう一度ビルド
+* 参考
+    * https://qiita.com/b_a_a_d_o/items/a6318290cd8f7a339ae0
+
