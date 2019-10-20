@@ -33,6 +33,16 @@
 * 参考
     * https://qiita.com/b_a_a_d_o/items/a6318290cd8f7a339ae0
 
+## jetify
+* react-native-permissionsで利用
+* 雑理解
+    * androidxのパッケージを、古いバージョンに戻してくれるもの
+
+```
+$ npx jetifier -r
+$ npx react native run-android
+```
+
 ## iOS対応
 * https://github.com/filsv/iPhoneOSDeviceSupport
 
@@ -109,6 +119,23 @@ $ firebase deploy --only functions
 $ firebase use act-arena-dev-27e15
 ```
 
+## firebase cli
+* 台本
+    1. google docsからtsvでダウンロード
+    1. dev
+
+    ```
+    $ ts-node src/cli.ts arenaScenario -d && ts-node src/cli.ts arenaScenario -f work/scenario.tsv
+    ```
+
+    1. prod
+
+    ```
+    $ export GOOGLE_APPLICATION_CREDENTIALS=<prod用認証json>
+    $ ts-node src/cli.ts arenaScenario -d && ts-node src/cli.ts arenaScenario -f work/scenario.tsv
+    $ export GOOGLE_APPLICATION_CREDENTIALS=<dev用認証json>
+    ```
+
 
 ## 解決した問題
 ### Android
@@ -119,3 +146,32 @@ $ firebase use act-arena-dev-27e15
 * JNI_ERR returned from JNI_OnLoad in libskyway.so
     * app/proguard-rules.proに以下の一行追加
     * -keep class io.skyway.Peer.** {*;}
+* signが必要？
+    * 勝手にやられるから必要ないっぽい
+    
+    ```
+    $ jarsigner -verify -verbose android/app/build/outputs/apk/release/app-release.apk
+    ```
+
+* zipalignが必要？
+    * 勝手にやられるから必要ないっぽい
+    
+    ```
+    $ ~/Library/Android/sdk/build-tools/29.0.0/zipalign -c -v 4 android/app/build/outputs/apk/debug/app-debug.apk
+
+    (略)
+
+    Verification succesful
+    ```
+
+### iOS
+#### Apple Mach-O Linker
+* RNSkywayがないエラー
+* 一回目
+    * https://webrtc.ecl.ntt.com/ios-tutorial.html
+    * SDKの追加をやり直したら治った
+* 再発
+    * Linked Framework and LibrariesからlibRNSkywayを消したらビルドできた
+        * でも実行時にNative Module cannnot null のエラーが出た
+    * 色々いじっていて、libRNSkywayを足したあと治った
+        * 詳細がよくわからん・・・
