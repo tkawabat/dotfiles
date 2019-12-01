@@ -40,7 +40,7 @@
 
 ```
 $ npx jetifier -r
-$ npx react native run-android
+$ npx react-native run-android
 ```
 
 ## iOS対応
@@ -175,3 +175,20 @@ $ firebase use act-arena-dev-27e15
         * でも実行時にNative Module cannnot null のエラーが出た
     * 色々いじっていて、libRNSkywayを足したあと治った
         * 詳細がよくわからん・・・
+
+#### stagingの作り方
+* terminal
+    1. cp ios/act_arena/Supporting/EXShell.plist{,.stg}
+    1. vim ios/act_arena/Supporting/EXShell.plist.stg
+        * release_channelをstgに
+* xcode上で
+    * TARGETSをコピー
+    * スキーマ名を変更
+    * スキーマのbuild configurationをreleaseに
+    * [Build phase] -> [Copy Bundle Resource]で上記ファイルを置き換え
+
+#### react-native-background-fetch
+* pathが間違っている
+    * [Build Phase] -> [Compline Source]
+    * ヘッダーを一度消してから、node_modules以下のを追加
+* https://github.com/transistorsoft/react-native-background-fetch/issues/173
