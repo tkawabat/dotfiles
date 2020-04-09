@@ -15,3 +15,4 @@
 * configのnotices
     * array -> stringで入れていく
     * 改行は\nで入れて、アプリ内でreplace
+    * noticesがないとエラーになる。表示しないときは要素数0にする
