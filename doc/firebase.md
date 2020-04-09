@@ -10,3 +10,8 @@
     * AppDelegate.m に数行追加
 * 修正コミット
     * https://github.com/tkawabat/act_arena/commit/94b1c39fac204db75cf3378e446b1e4523b1554c
+
+## お知らせモジュール
+* configのnotices
+    * array -> stringで入れていく
+    * 改行は\nで入れて、アプリ内でreplace

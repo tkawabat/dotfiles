@@ -3,6 +3,7 @@
 
 ## sentryを入れるとxcodeのビルドがエラーになる
 * Build Phase -> Upload Debug Symbols to Sentry -> nodeへのパスを通す
+* https://engineer.kasajei.com/entry/2018/08/19/ReactNative_Sentry_build
 
 ## sentry.propeties
 * android, iosディレ以下に配置
@@ -18,4 +19,4 @@ defaults.org=<オーガナイザ名>
 defaults.project=<プロジェクト名>
 auth.token=<トークン>
 cli.executable=node_modules/@sentry/cli/bin/sentry-cli
-```
+`,``

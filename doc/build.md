@@ -114,7 +114,7 @@ $ react-native run-android --variant=release
 
 ```
 $ firebase use act-arena
-$ firebase list
+$ firebase projects:list
 $ firebase deploy --only functions
 $ firebase use act-arena-dev-27e15
 ```
@@ -164,7 +164,7 @@ $ firebase use act-arena-dev-27e15
     Verification succesful
     ```
 
-### iOS
+### iOS(Xcode 10.1)
 #### Apple Mach-O Linker
 * RNSkywayがないエラー
 * 一回目
@@ -192,3 +192,25 @@ $ firebase use act-arena-dev-27e15
     * [Build Phase] -> [Compline Source]
     * ヘッダーを一度消してから、node_modules以下のを追加
 * https://github.com/transistorsoft/react-native-background-fetch/issues/173
+
+#### AppDelegate.h not found
+* Podファイルをもとに戻す
+* 以下のコマンドで消してやり直す
+
+```
+rm -rf Pods Podfile.lock build && pod install
+```
+
+### iOS(Xcode 11)
+#### GoogleService-Info.plist
+* プロジェクトルートにおいてある、GoogleService-Info-***.plist をコピーするスクリプトをbuild phasesで仕込む
+    * PROJECTファイル -> TARGETS -> Build Phases -> + -> New Run Script Phase
+* https://qiita.com/KazaKago/items/aacf6eaec65b6d4244d0
+
+#### TCCVPixelBuffer is implemented
+* ログは出るけど、これは無視してOK
+* アプリ落ちるなら別の要因
+
+#### 音声ファイルの読み込みができなくなった
+* react-native-sound でアプリ名にスペースや日本語が入っているとエラーになる
+
