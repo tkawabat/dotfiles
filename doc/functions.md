@@ -23,7 +23,7 @@ $ firebase use act-arena-dev-27e15
 
     ```
     $ export GOOGLE_APPLICATION_CREDENTIALS=<prod用認証json>
-    $ ts-node src/cli.ts arenaScenario -d && ts-node src/cli.ts arenaScenario -f work/scenario.tsv
+    $ ts-node src/cli.ts arenaScenario -d && ts-node src/cli.ts arenaScenario -f work/arenaScenario.tsv
     $ export GOOGLE_APPLICATION_CREDENTIALS=<dev用認証json>
     ```
 
