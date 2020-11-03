@@ -54,3 +54,10 @@ export PATH=${HOME}/local/bin/:${PATH}
 export LD_LIBRARY_PATH=${HOME}/local/lib:$LD_LIBRARY_PATH
 
 if [ -e ~/.local_zsh_rc ]; then source ~/.local_zsh_rc; fi
+
+# pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH=${PYENV_ROOT}/shim:$PATH
+if command -v pyenv 1>/dev/null 2>&1; then
+      eval "$(pyenv init -)"
+fi
