@@ -48,7 +48,7 @@ alias jgrep='grep -R --exclude-dir=".git" --exclude-dir="log" --exclude="*.min.*
 ## macで不具合が起きたのでコメントアウト
 #zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
 
-export PATH=${HOME}/local/bin/:${PATH}
+export PATH=/opt/homebrew/bin:${HOME}/.local/bin:${HOME}/local/bin:${PATH}
 
 # tmux用にlibeventのパスを教える
 export LD_LIBRARY_PATH=${HOME}/local/lib:$LD_LIBRARY_PATH
