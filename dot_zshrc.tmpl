@@ -8,11 +8,14 @@ if [ -d /usr/local/share/zsh-completions ]; then
 fi
 {{- end }}
 autoload -Uz compinit
-compinit -u
+compinit -i
 [[ -d "$HOME/.zsh/cache" ]] || mkdir -p "$HOME/.zsh/cache"
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$HOME/.zsh/cache"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'
+zstyle ':completion:*' group-name ''
 
 PROMPT='%~$ '
 
@@ -22,7 +25,7 @@ setopt extended_glob
 setopt interactive_comments
 
 export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000
+export HISTSIZE=100000
 export SAVEHIST=100000
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
@@ -32,6 +35,9 @@ setopt share_history
 setopt hist_expire_dups_first
 setopt hist_reduce_blanks
 setopt hist_verify
+setopt extended_history
+setopt hist_save_no_dups
+setopt hist_fcntl_lock
 zstyle ':completion:*:default' menu select=1
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
@@ -98,7 +104,7 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
   if [ -s "$NVM_DIR/bash_completion" ]; then
     . "$NVM_DIR/bash_completion"
   fi
-  if command -v nvm >/dev/null 2>&1 && nvm alias default >/dev/null 2>&1; then
-    nvm use --silent default >/dev/null 2>&1
+  if command -v nvm >/dev/null 2>&1 && [ -f .nvmrc ]; then
+    nvm use --silent >/dev/null 2>&1
   fi
 fi
