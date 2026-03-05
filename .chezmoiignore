@@ -1,3 +1,18 @@
 README.md
 doc/**
 .gitignore
+
+# Default deny for Codex / Claude runtime state.
+.codex/**
+.claude/**
+
+# Managed exceptions: .codex
+!.codex/
+!.codex/AGENTS.md
+!.codex/config.toml
+
+# Managed exceptions: .claude
+!.claude/
+!.claude/settings.json
+!.claude/agents/
+!.claude/agents/pr-creator.md

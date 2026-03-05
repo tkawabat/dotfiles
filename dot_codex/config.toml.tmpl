@@ -1,0 +1,85 @@
+{{- $home := .chezmoi.homeDir -}}
+{{- $codex := dict -}}
+{{- if hasKey . "codex" -}}
+{{- $codex = index . "codex" -}}
+{{- end -}}
+{{- $extraTrusted := list -}}
+{{- if hasKey $codex "extra_trusted_projects" -}}
+{{- $extraTrusted = index $codex "extra_trusted_projects" -}}
+{{- end -}}
+{{- $extraBlocks := list -}}
+{{- if hasKey $codex "extra_config_toml_blocks" -}}
+{{- $extraBlocks = index $codex "extra_config_toml_blocks" -}}
+{{- end -}}
+network_access = true
+
+notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
+notifications = ["agent-turn-complete","approval-requested"]
+model = "gpt-5.3-codex"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+
+[mcp_servers.notion]
+command = "npx"
+args = ["-y", "mcp-remote", "https://mcp.notion.com/sse"]
+env = {}
+enabled = false
+
+[mcp_servers.atlassian]
+command = "npx"
+args = ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
+env = {}
+enabled = false
+
+[mcp_servers.context7]
+command = "npx"
+args = ["--yes", "@upstash/context7-mcp"]
+env = {}
+
+[mcp_servers.playwright]
+args = ["@playwright/mcp@latest"]
+command = "npx"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[projects."{{ $home }}/git/lima"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/lima".mcp_servers.serena]
+command = "uvx"
+args = ["--from", "git+ssh://git@github.com/legalforce/serena", "serena-mcp-server", "--project", "{{ $home }}/git/lima", "--context", "ide-assistant"]
+env = {}
+
+[projects."{{ $home }}/git/lf-rd-contract-ontology"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/astria"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/loc-platform"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/lf-rd-inspection-v3"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/loc-app"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/akupara-proto"]
+trust_level = "trusted"
+
+[projects."{{ $home }}/git/label-studio"]
+trust_level = "untrusted"
+{{- range $extraTrusted }}
+
+[projects."{{ . }}"]
+trust_level = "trusted"
+{{- end }}
+{{- range $extraBlocks }}
+
+{{ . }}
+{{- end }}

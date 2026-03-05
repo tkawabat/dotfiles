@@ -1,0 +1,205 @@
+{{- $claude := dict -}}
+{{- if hasKey . "claude" -}}
+{{- $claude = index . "claude" -}}
+{{- end -}}
+{{- $extraAllow := list -}}
+{{- if hasKey $claude "extra_allow_permissions" -}}
+{{- $extraAllow = index $claude "extra_allow_permissions" -}}
+{{- end -}}
+{{- $extraAsk := list -}}
+{{- if hasKey $claude "extra_ask_permissions" -}}
+{{- $extraAsk = index $claude "extra_ask_permissions" -}}
+{{- end -}}
+{{- $extraDeny := list -}}
+{{- if hasKey $claude "extra_deny_permissions" -}}
+{{- $extraDeny = index $claude "extra_deny_permissions" -}}
+{{- end -}}
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "ENABLE_LSP_TOOL": "1",
+    "ENABLE_TOOL_SEARCH": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(codex review:*)",
+      "Bash(cp:*)",
+      "Bash(diff:*)",
+      "Bash(docker compose:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(fd:*)",
+      "Bash(gh api -X GET:*)",
+      "Bash(gh api --method GET:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh workflow list:*)",
+      "Bash(gh workflow view:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git diff:*)",
+      "Bash(git init:*)",
+      "Bash(git log:*)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git merge-base:*)",
+      "Bash(git mv:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Bash(go:*)",
+      "Bash(golangci-lint:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(jq:*)",
+      "Bash(kubectl --context $K8S_CONTEXT -n $K8S_NAMESPACE get:*)",
+      "Bash(kubectl --context $K8S_CONTEXT -n $K8S_NAMESPACE describe:*)",
+      "Bash(kubectl --context $K8S_CONTEXT -n $K8S_NAMESPACE logs:*)",
+      "Bash(kubectl --context $K8S_CONTEXT -n $K8S_NAMESPACE port-forward:*)",
+      "Bash(ls:*)",
+      "Bash(just:*)",
+      "Bash(make:*)",
+      "Bash(mise:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(npx ccusage@latest:*)",
+      "Bash(pinact:*)",
+      "Bash(playwright-cli:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm create:*)",
+      "Bash(pnpm exec playwright:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm test:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(tail:*)",
+      "Bash(tee:*)",
+      "Bash(touch:*)",
+      "Bash(true)",
+      "Bash(xargs grep:*)",
+      "Bash(yamlfmt:*)",
+      "Bash(yq:*)",
+      "Read(~/.claude/history.jsonl)",
+      "Write(//tmp/claude/**)",
+      "Skill(go-test-coverage:*)",
+      "Skill(playwright-cli *)",
+      "Skill(plugin-dev:*)",
+      "Skill(skill-creator *)",
+      "Skill(tech-docs:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:github.com)",
+      "mcp__atlassian",
+      "mcp__context7__get-library-docs",
+      "mcp__context7__resolve-library-id",
+      "mcp__linear__get*",
+      "mcp__linear__list*",
+      "mcp__notion__notion-search",
+      "mcp__notion__notion-fetch",
+      "mcp__notion__notion-get-comments",
+      "mcp__plugin_context7_context7",
+      "mcp__plugin_playwright_playwright"{{- range $extraAllow }},
+      {{ . | toJson }}{{- end }}
+    ],
+    "ask": [
+      "Bash(curl:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(git branch -d:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit --no-verify:*)",
+      "Bash(git reset:*)",
+      "Bash(kubectx:*)",
+      "Skill(skill-installer *)",
+      "Bash(rm -f:*)",
+      "Bash(rm -rf:*)",
+      "Bash(rm ~/:*)"{{- range $extraAsk }},
+      {{ . | toJson }}{{- end }}
+    ],
+    "deny": [
+      "Bash(aws:*)",
+      "Bash(bq:*)",
+      "Bash(eval:*)",
+      "Bash(gcloud:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(lefthook uninstall:*)",
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf /Users:*)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/)",
+      "Bash(rm -rf ~/*)",
+      "Bash(sudo:*)",
+      "Bash(wget:*)",
+      "Read(~/.codex/auth.json)",
+      "Read(**/.envrc*)",
+      "Read(~/.kube/config)",
+      "Read(**/id_ecdsa)",
+      "Read(**/id_ed25519)",
+      "Read(**/id_rsa)",
+      "Read(**/.env*)",
+      "Write(**/secrets/**)"{{- range $extraDeny }},
+      {{ . | toJson }}{{- end }}
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message '確認して！' -subtitle $(basename $(pwd)) -sound default"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message '作業終わったよ〜' -subtitle $(basename $(pwd)) -sound default"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "playwright-skill@playwright-skill": true,
+    "plugin-dev@anthropics/claude-code": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowUnixSockets": [
+        "~/.orbstack/run/docker.sock"
+      ],
+      "allowLocalBinding": true
+    },
+    "excludedCommands": [
+      "docker",
+      "git"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  }
+}
