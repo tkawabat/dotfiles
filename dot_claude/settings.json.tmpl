@@ -23,13 +23,24 @@
   "permissions": {
     "allow": [
       "Bash(cat:*)",
-      "Bash(codex review:*)",
       "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
       "Bash(diff:*)",
-      "Bash(docker compose:*)",
       "Bash(echo:*)",
       "Bash(find:*)",
       "Bash(fd:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(tail:*)",
+      "Bash(tee:*)",
+      "Bash(touch:*)",
+      "Bash(true)",
+      "Bash(xargs grep:*)",
+      "Bash(yamlfmt:*)",
+      "Bash(yq:*)",
+      "Bash(docker compose:*)",
+      "Bash(codex review:*)",
       "Bash(gh api -X GET:*)",
       "Bash(gh api --method GET:*)",
       "Bash(gh issue:*)",
@@ -47,7 +58,6 @@
       "Bash(git merge-base:*)",
       "Bash(git mv:*)",
       "Bash(git pull:*)",
-      "Bash(git push:*)",
       "Bash(git show:*)",
       "Bash(git status:*)",
       "Bash(go:*)",
@@ -63,10 +73,7 @@
       "Bash(just:*)",
       "Bash(make:*)",
       "Bash(mise:*)",
-      "Bash(mkdir:*)",
-      "Bash(mv:*)",
       "Bash(npx ccusage@latest:*)",
-      "Bash(pinact:*)",
       "Bash(playwright-cli:*)",
       "Bash(pnpm add:*)",
       "Bash(pnpm build:*)",
@@ -78,17 +85,8 @@
       "Bash(pnpm typecheck:*)",
       "Bash(pnpm run:*)",
       "Bash(pnpm test:*)",
-      "Bash(rg:*)",
-      "Bash(sed:*)",
-      "Bash(tail:*)",
-      "Bash(tee:*)",
-      "Bash(touch:*)",
-      "Bash(true)",
-      "Bash(xargs grep:*)",
-      "Bash(yamlfmt:*)",
-      "Bash(yq:*)",
       "Read(~/.claude/history.jsonl)",
-      "Write(//tmp/claude/**)",
+      "Write(/tmp/claude/**)",
       "Skill(go-test-coverage:*)",
       "Skill(playwright-cli *)",
       "Skill(plugin-dev:*)",
@@ -160,7 +158,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message '確認して！' -subtitle $(basename $(pwd)) -sound default"
+            "command": "terminal-notifier -title 'Claude Code' -message '確認して！' -subtitle $(basename \"$PWD\") -sound default"
           }
         ]
       }
@@ -171,7 +169,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message '作業終わったよ〜' -subtitle $(basename $(pwd)) -sound default"
+            "command": "terminal-notifier -title 'Claude Code' -message '作業終わったよ〜' -subtitle $(basename \"$PWD\") -sound default"
           }
         ]
       }
