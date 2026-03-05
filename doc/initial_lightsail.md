@@ -87,7 +87,5 @@ $ git config --global alias.co commit
     ```
     $ cd ~/git/
     $ git clone git@github.com:tkawabat/dotfiles.git
-    $ cd dotfiles
-    $ sh install.sh
-    # エラー出まくったけどファイル存在確認なので気にしない
+    $ chezmoi init --apply ~/git/dotfiles
     ```

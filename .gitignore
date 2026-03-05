@@ -1,0 +1,16 @@
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs / local work files
+*.log
+tmp/
+.tmp/
+
+# Secrets and host-local files (must stay untracked)
+private_dot_ssh/private_config.local
+dot_local_zsh_rc
+.env
+.env.*
