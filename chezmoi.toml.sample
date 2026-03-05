@@ -7,6 +7,21 @@
 # extra_trusted_projects = ["/Users/your-name/git/private-repo"]
 extra_trusted_projects = []
 
+# Codex のコマンド許可リストに追加する prefix ルール（allow）
+# 例:
+# extra_allow_prefix_rules = ["gh run view", "npm run build"]
+extra_allow_prefix_rules = []
+
+# Codex の確認付き実行リストに追加する prefix ルール（prompt）
+# 例:
+# extra_prompt_prefix_rules = ["git push", "kubectl apply"]
+extra_prompt_prefix_rules = []
+
+# Codex の禁止リストに追加する prefix ルール（forbidden）
+# 例:
+# extra_forbidden_prefix_rules = ["terraform destroy", "rm -rf /tmp"]
+extra_forbidden_prefix_rules = []
+
 # ~/.codex/config.toml に追記する生の TOML ブロック
 # 1ブロックを1つの複数行文字列として追加します
 # 例:
