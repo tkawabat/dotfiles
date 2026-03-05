@@ -30,6 +30,25 @@ chezmoi apply --dry-run --verbose
 chezmoi apply
 ```
 
+## 端末固有設定（~/.config/chezmoi/chezmoi.toml）
+
+`~/.config/chezmoi/chezmoi.toml` は、端末ごとのローカル設定を置くファイルです。  
+このリポジトリでは管理せず、各端末で作成して使います。
+
+初回作成:
+
+```bash
+mkdir -p ~/.config/chezmoi
+cp ~/git/dotfiles/chezmoi.toml.sample ~/.config/chezmoi/chezmoi.toml
+```
+
+`~/.config/chezmoi/chezmoi.toml` を編集したあとに反映:
+
+```bash
+chezmoi apply --dry-run --verbose
+chezmoi apply
+```
+
 ## ロールバック
 
 直近バックアップから戻す:

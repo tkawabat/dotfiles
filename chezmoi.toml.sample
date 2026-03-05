@@ -1,0 +1,20 @@
+# 端末固有の chezmoi データ例
+# このファイルを ~/.config/chezmoi/chezmoi.toml にコピーして値を編集します
+
+[data.codex]
+# この端末でだけ trusted にしたいプロジェクトパス
+# 例:
+# extra_trusted_projects = ["/Users/your-name/git/private-repo"]
+extra_trusted_projects = []
+
+# ~/.codex/config.toml に追記する生の TOML ブロック
+# 1ブロックを1つの複数行文字列として追加します
+# 例:
+# extra_config_toml_blocks = ['''
+# [mcp_servers.example]
+# command = "npx"
+# args = ["-y", "example-mcp"]
+# env = {}
+# enabled = false
+# ''']
+extra_config_toml_blocks = []
