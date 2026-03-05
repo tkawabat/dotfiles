@@ -1,25 +1,18 @@
-# dotfiles (chezmoi)
+# dotfiles
 
 このリポジトリは `chezmoi` の source state として運用します。  
-`install.sh` は廃止し、適用は `chezmoi` のみを使います。
 
 ## 初回セットアップ
 
 ### 1. chezmoi をインストール
 
 - macOS: `brew install chezmoi`
-- Ubuntu/WSL2: `sudo snap install chezmoi --classic` または公式手順
+- Ubuntu/WSL2: `sudo snap install chezmoi --classic`
 
 ### 2. dotfiles を適用
 
 ```bash
-chezmoi init --apply https://github.com/<your-account>/dotfiles.git
-```
-
-ローカル clone から適用する場合:
-
-```bash
-chezmoi init --apply /path/to/dotfiles
+chezmoi init --apply ~/git/dotfiles
 ```
 
 ## 日常運用
@@ -30,15 +23,10 @@ chezmoi init --apply /path/to/dotfiles
 chezmoi diff
 ```
 
-適用前の dry-run:
-
-```bash
-chezmoi apply --dry-run --verbose
-```
-
 適用:
 
 ```bash
+chezmoi apply --dry-run --verbose
 chezmoi apply
 ```
 
