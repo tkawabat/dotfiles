@@ -43,37 +43,9 @@ command = "npx"
 [mcp_servers.linear]
 url = "https://mcp.linear.app/mcp"
 
-[projects."{{ $home }}/git/lima"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/lima".mcp_servers.serena]
-command = "uvx"
-args = ["--from", "git+ssh://git@github.com/legalforce/serena", "serena-mcp-server", "--project", "{{ $home }}/git/lima", "--context", "ide-assistant"]
-env = {}
-
-[projects."{{ $home }}/git/lf-rd-contract-ontology"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/astria"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/loc-platform"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/lf-rd-inspection-v3"]
-trust_level = "trusted"
-
 [projects."{{ $home }}/git"]
 trust_level = "trusted"
 
-[projects."{{ $home }}/git/loc-app"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/akupara-proto"]
-trust_level = "trusted"
-
-[projects."{{ $home }}/git/label-studio"]
-trust_level = "untrusted"
 {{- range $extraTrusted }}
 
 [projects."{{ . }}"]
