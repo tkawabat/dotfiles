@@ -1,6 +1,8 @@
 # 端末固有の chezmoi データ例
 # このファイルを ~/.config/chezmoi/chezmoi.toml にコピーして値を編集します
 
+sourceDir = "~/git/dotfiles"
+
 [data.codex]
 # この端末でだけ trusted にしたいプロジェクトパス
 # 例:
