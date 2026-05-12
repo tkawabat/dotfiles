@@ -48,6 +48,7 @@ alias jgrep='grep -R --exclude-dir=".git" --exclude-dir="log" --exclude="*.min.*
 
 typeset -U path PATH
 path=(
+  "$HOME/.local/share/mise/shims"
   "$HOME/.antigravity/antigravity/bin"
   "$HOME/pkg/flutter/bin"
   "$HOME/.pub-cache/bin"
@@ -68,6 +69,11 @@ export LD_LIBRARY_PATH="$HOME/local/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 # Host-local settings and secrets are managed outside this repository.
 if [ -r "$HOME/.local_zsh_rc" ]; then
   source "$HOME/.local_zsh_rc"
+fi
+
+# mise
+if [ -d "$HOME/.local/bin/mise" ]
+  eval \"\$($HOME/.local/bin/mise activate zsh)\"
 fi
 
 # pyenv
