@@ -46,6 +46,7 @@ alias jgrep='grep -R --exclude-dir=".git" --exclude-dir="log" --exclude="*.min.*
 typeset -U path PATH
 path=(
   "$HOME/.local/share/mise/shims"
+  "$HOME/.bun/bin"
   "$HOME/.antigravity/antigravity/bin"
   "$HOME/pkg/flutter/bin"
   "$HOME/.pub-cache/bin"
@@ -111,3 +112,8 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
     nvm use --silent >/dev/null 2>&1
   fi
 fi
+
+
+# bun
+[ -s "/Users/toshiki.kawabata/.bun/_bun" ] && source "/Users/toshiki.kawabata/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
