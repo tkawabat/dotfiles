@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Register MCP servers for Claude Code at user scope.
+# Re-runs when this file's hash changes (chezmoi run_onchange).
+#
+# Notion / Atlassian (Jira / Confluence) は OAuth ベースの remote MCP。
+# 初回登録後、`claude` 内で `/mcp` を実行してブラウザ認証を行う必要がある。
+set -euo pipefail
+
+if ! command -v claude >/dev/null 2>&1; then
+  echo "claude CLI not found; skipping MCP registration" >&2
+  exit 0
+fi
+
+# servers: name|transport|url
+servers=(
+  "notion|sse|https://mcp.notion.com/sse"
+  "atlassian|sse|https://mcp.atlassian.com/v1/sse"
+)
+
+existing="$(claude mcp list 2>/dev/null || true)"
+
+for entry in "${servers[@]}"; do
+  IFS='|' read -r name transport url <<<"$entry"
+  if printf '%s\n' "$existing" | grep -q "^${name}:"; then
+    echo "MCP server '${name}' already registered; skipping"
+    continue
+  fi
+  echo "Adding MCP server '${name}' (${transport})"
+  claude mcp add --scope user --transport "${transport}" "${name}" "${url}"
+done
