@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  "app": {
+    "reorderOnNotification": false
+  },
+
+  "sidebar": {
+    "showBranchDirectory": true,
+    "showLog": true,
+    "showPullRequests": false,
+    "showWorkspaceDescription": true,
+    "showNotificationMessage": true,
+    "showSSH": false,
+    "showPorts": false,
+    "showProgress": true,
+    "showCustomMetadata": false
+  }
+}
