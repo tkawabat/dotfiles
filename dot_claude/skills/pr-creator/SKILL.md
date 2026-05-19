@@ -1,22 +1,25 @@
 ---
 name: pr-creator
-description: ユーザーが現在のブランチを GitHub に push し、レビュー用の Pull Request を作成したいときに使うエージェント。
-model: sonnet
+description: ユーザーが現在のブランチを GitHub に push し、レビュー用の Pull Request を作成したいときに使うスキル。「PR を作って」「プルリクして」「pull request を出して」などの要望や、現在のブランチを push してレビュー依頼を始めたいときに起動する。
+argument-hint: "[target-branch]"
+allowed-tools: [Bash, Read, Grep, Glob]
 ---
 
-主な責務は、現在のブランチを GitHub に push し、効果的なコードレビューにつながる質の高い Pull Request を作成することです。
+# pr-creator
+
+現在のブランチを GitHub に push し、効果的なコードレビューにつながる質の高い Pull Request を作成する。
 
 ## 主要な責務
 
-1. **ブランチ管理**: 現在のブランチを GitHub（`origin`）へ push し、必要なフラグで追跡設定を行う。
+1. **ブランチ管理**: 現在のブランチを `origin` へ push し、必要に応じて upstream を設定する。
 
 2. **ターゲットブランチの選定**:
-   - ユーザーがターゲットブランチを指定した場合（例: 「develop 向けにPRを作って」）、そのブランチを base に使う
-   - 指定がない場合は `main` を既定値として使う
+   - 引数 / ユーザー指定があればそれを base に使う（例: 「develop 向けに PR を作って」→ `develop`）
+   - 指定がない場合は `main` を既定値とする
    - PR 作成前にターゲットブランチの存在を確認する
 
-3. **変更分析**: PR 作成前に次を必ず実施する:
-   - `git` コマンドで変更ファイルを特定する
+3. **変更分析**: PR 作成前に必ず実施する:
+   - 変更ファイルを特定する
    - `git diff` で差分を読み、内容を理解する
    - 変更の性質を分析する（機能追加、バグ修正、リファクタ、ドキュメント更新など）
    - 変更範囲と影響を把握する
@@ -44,34 +47,26 @@ model: sonnet
 
 ### Step 1: 現在状態の確認
 ```bash
-# Check current branch and status
 git branch --show-current
 git status
 ```
 
 ### Step 2: 変更分析
 ```bash
-# Get list of changed files
 git diff --name-only origin/main..HEAD  # or appropriate base branch
-
-# Get detailed diff
 git diff origin/main..HEAD
-
-# Review recent commits
 git log origin/main..HEAD --oneline
 ```
 
 ### Step 3: ブランチを push
 ```bash
-# Push current branch and set upstream tracking
 git push -u origin HEAD
 ```
 
 ### Step 4: PR テンプレート確認
 ```bash
-# Look for PR template
 cat .github/PULL_REQUEST_TEMPLATE.md
-# or other common locations
+# 他の一般的な場所も確認: .github/pull_request_template.md, docs/pull_request_template.md
 ```
 
 ### Step 5: Pull Request 作成
@@ -79,7 +74,10 @@ cat .github/PULL_REQUEST_TEMPLATE.md
 GitHub CLI を使って、説明文を整えた DRAFT PR を作成する:
 
 ```bash
-gh pr create --draft --base <target-branch> --title "<concise-title>" --body "<detailed-description>"
+gh pr create --draft --base <target-branch> --title "<concise-title>" --body "$(cat <<'EOF'
+<detailed-description>
+EOF
+)"
 ```
 
 **重要**: PR は必ず `--draft` を付けて DRAFT で作成する。これにより、作成者はレビュー依頼前に説明文の見直し、CI チェックの完了確認、最終調整を行える。
@@ -93,8 +91,6 @@ gh pr create --draft --base <target-branch> --title "<concise-title>" --body "<d
 - 既存のコミット規約がある場合は変更種別を合わせる
 
 ## PR 本文の構成（テンプレートがない場合）
-
-テンプレートがない場合は次の構成を使う:
 
 ```markdown
 ## Summary
