@@ -14,5 +14,8 @@ doc/**
 # Managed exceptions: .claude
 !.claude/
 !.claude/settings.json
-!.claude/agents/
-!.claude/agents/pr-creator.md
+!.claude/skills/
+!.claude/skills/pr-creator/
+!.claude/skills/pr-creator/SKILL.md
+!.claude/skills/code-review/
+!.claude/skills/code-review/SKILL.md
