@@ -11,10 +11,15 @@ if ! command -v claude >/dev/null 2>&1; then
   exit 0
 fi
 
-# servers: name|transport|url
+# remote servers: name|transport|url
 servers=(
   "notion|sse|https://mcp.notion.com/sse"
   "atlassian|sse|https://mcp.atlassian.com/v1/sse"
+)
+
+# stdio servers: name|command[|arg1|arg2|...]
+stdio_servers=(
+  "playwright|npx|@playwright/mcp@latest"
 )
 
 existing="$(claude mcp list 2>/dev/null || true)"
@@ -27,4 +32,16 @@ for entry in "${servers[@]}"; do
   fi
   echo "Adding MCP server '${name}' (${transport})"
   claude mcp add --scope user --transport "${transport}" "${name}" "${url}"
+done
+
+for entry in "${stdio_servers[@]}"; do
+  IFS='|' read -r -a parts <<<"$entry"
+  name="${parts[0]}"
+  cmd_args=("${parts[@]:1}")
+  if printf '%s\n' "$existing" | grep -q "^${name}:"; then
+    echo "MCP server '${name}' already registered; skipping"
+    continue
+  fi
+  echo "Adding MCP server '${name}' (stdio)"
+  claude mcp add --scope user "${name}" -- "${cmd_args[@]}"
 done
