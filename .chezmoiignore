@@ -2,6 +2,10 @@ README.md
 doc/**
 .gitignore
 
+# このリポジトリ自身のプロジェクト用 CLAUDE.md は chezmoi で配置しない
+# （ホーム用は dot_claude/CLAUDE.md → ~/.claude/CLAUDE.md を使う）。
+CLAUDE.md
+
 # Default deny for Codex / Claude runtime state.
 .codex/**
 .claude/**
@@ -13,6 +17,7 @@ doc/**
 
 # Managed exceptions: .claude
 !.claude/
+!.claude/CLAUDE.md
 !.claude/settings.json
 !.claude/skills/
 !.claude/skills/pr-creator/
