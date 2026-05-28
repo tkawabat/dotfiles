@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Install agent-browser CLI (Vercel Labs) and register it as a Claude Code skill.
+# 旧 Playwright MCP の代替。ハーネスへのトークン消費を抑える目的で導入。
+# Re-runs when this file's hash changes (chezmoi run_onchange).
+set -euo pipefail
+
+if ! command -v agent-browser >/dev/null 2>&1; then
+  if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+    echo "Installing agent-browser via Homebrew"
+    brew install agent-browser || {
+      echo "brew install agent-browser failed; falling back to npm" >&2
+      command -v npm >/dev/null 2>&1 && npm install -g agent-browser
+    }
+  elif command -v npm >/dev/null 2>&1; then
+    echo "Installing agent-browser via npm (global)"
+    npm install -g agent-browser
+  else
+    echo "agent-browser not installed and no brew/npm available; skipping" >&2
+    exit 0
+  fi
+fi
+
+if command -v agent-browser >/dev/null 2>&1; then
+  # Chrome for Testing を取得 (冪等; インストール済みならスキップ)
+  echo "Running 'agent-browser install' (Chrome for Testing setup)"
+  agent-browser install || echo "agent-browser install returned non-zero; continuing" >&2
+fi
+
+# Claude Code 用スキルとして登録 (冪等)
+if command -v claude >/dev/null 2>&1 && command -v npx >/dev/null 2>&1; then
+  if [ ! -d "${HOME}/.claude/skills/agent-browser" ]; then
+    echo "Adding agent-browser skill to Claude Code"
+    npx --yes skills add vercel-labs/agent-browser || \
+      echo "skills add failed; install manually with: npx skills add vercel-labs/agent-browser" >&2
+  else
+    echo "agent-browser skill already present; skipping"
+  fi
+fi

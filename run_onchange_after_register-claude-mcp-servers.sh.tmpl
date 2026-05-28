@@ -18,11 +18,23 @@ servers=(
 )
 
 # stdio servers: name|command[|arg1|arg2|...]
-stdio_servers=(
-  "playwright|npx|@playwright/mcp@latest"
-)
+# ブラウザ操作系は agent-browser (CLI + Claude Skill) に集約しているため、
+# 現状 stdio MCP として登録するものはない。
+stdio_servers=()
 
 existing="$(claude mcp list 2>/dev/null || true)"
+
+# 旧設定で登録済みだが現在は管理対象外になった MCP サーバーを除去する。
+# 例: playwright (agent-browser に移行済み)
+obsolete_servers=(
+  "playwright"
+)
+for name in "${obsolete_servers[@]}"; do
+  if printf '%s\n' "$existing" | grep -q "^${name}:"; then
+    echo "Removing obsolete MCP server '${name}'"
+    claude mcp remove --scope user "${name}" >/dev/null 2>&1 || true
+  fi
+done
 
 for entry in "${servers[@]}"; do
   IFS='|' read -r name transport url <<<"$entry"
@@ -34,14 +46,16 @@ for entry in "${servers[@]}"; do
   claude mcp add --scope user --transport "${transport}" "${name}" "${url}"
 done
 
-for entry in "${stdio_servers[@]}"; do
-  IFS='|' read -r -a parts <<<"$entry"
-  name="${parts[0]}"
-  cmd_args=("${parts[@]:1}")
-  if printf '%s\n' "$existing" | grep -q "^${name}:"; then
-    echo "MCP server '${name}' already registered; skipping"
-    continue
-  fi
-  echo "Adding MCP server '${name}' (stdio)"
-  claude mcp add --scope user "${name}" -- "${cmd_args[@]}"
-done
+if [ "${#stdio_servers[@]}" -gt 0 ]; then
+  for entry in "${stdio_servers[@]}"; do
+    IFS='|' read -r -a parts <<<"$entry"
+    name="${parts[0]}"
+    cmd_args=("${parts[@]:1}")
+    if printf '%s\n' "$existing" | grep -q "^${name}:"; then
+      echo "MCP server '${name}' already registered; skipping"
+      continue
+    fi
+    echo "Adding MCP server '${name}' (stdio)"
+    claude mcp add --scope user "${name}" -- "${cmd_args[@]}"
+  done
+fi
