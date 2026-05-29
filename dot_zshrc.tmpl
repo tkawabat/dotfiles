@@ -46,6 +46,12 @@ alias dc="docker compose"
 alias cc="claude --permission-mode auto"
 
 typeset -U path PATH
+{{- if eq .chezmoi.os "darwin" }}
+path=(
+  /opt/homebrew/bin
+  $path
+)
+{{- end }}
 path=(
   "$HOME/.local/share/mise/shims"
   "$HOME/.bun/bin"
@@ -56,12 +62,6 @@ path=(
   "$HOME/local/bin"
   $path
 )
-{{- if eq .chezmoi.os "darwin" }}
-path=(
-  /opt/homebrew/bin
-  $path
-)
-{{- end }}
 
 # tmux builds sometimes depend on local libs.
 export LD_LIBRARY_PATH="$HOME/local/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
