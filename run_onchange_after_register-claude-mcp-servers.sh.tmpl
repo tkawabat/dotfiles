@@ -14,7 +14,7 @@ fi
 # remote servers: name|transport|url
 servers=(
   "notion|sse|https://mcp.notion.com/sse"
-  "atlassian|sse|https://mcp.atlassian.com/v1/sse"
+  "atlassian|http|https://mcp.atlassian.com/v1/mcp"
 )
 
 # stdio servers: name|command[|arg1|arg2|...]
@@ -35,6 +35,19 @@ for name in "${obsolete_servers[@]}"; do
     claude mcp remove --scope user "${name}" >/dev/null 2>&1 || true
   fi
 done
+
+# 既存登録の URL が宣言と食い違う場合は削除して再登録させる
+# (例: Atlassian の SSE → Streamable HTTP 移行)。
+for entry in "${servers[@]}"; do
+  IFS='|' read -r name transport url <<<"$entry"
+  line="$(printf '%s\n' "$existing" | grep "^${name}:" || true)"
+  if [ -n "$line" ] && ! printf '%s' "$line" | grep -qF "$url"; then
+    echo "Re-registering MCP server '${name}' (endpoint changed)"
+    claude mcp remove --scope user "${name}" >/dev/null 2>&1 || true
+  fi
+done
+
+existing="$(claude mcp list 2>/dev/null || true)"
 
 for entry in "${servers[@]}"; do
   IFS='|' read -r name transport url <<<"$entry"
