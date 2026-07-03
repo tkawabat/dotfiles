@@ -303,17 +303,20 @@
     },
     "filesystem": {
       "allowWrite": [
-        "./work"
+        "./work",
+        "~/.gitconfig",
+        "~/.config/chezmoi",
+        "~/.local/share/chezmoi"
       ]
     },
     "excludedCommands": [
-      "docker",
-      "git",
-      "gh",
-      "mise",
-      "npm",
-      "pnpm",
-      "chezmoi"
+      "docker *",
+      "git *",
+      "gh *",
+      "mise *",
+      "npm *",
+      "pnpm *",
+      "chezmoi *"
     ]
   },
   "statusLine": {
