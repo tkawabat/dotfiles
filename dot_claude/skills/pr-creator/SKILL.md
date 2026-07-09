@@ -1,6 +1,6 @@
 ---
 name: pr-creator
-description: 現在のブランチを push して Pull Request を作成するスキル。「PR 作って」「pr作って」「PR 出して」「プルリク」「pull request を出して」「push して PR」で起動
+description: 現在のブランチを push して Pull Request を作成するスキル。「PR 作って」「pr作成」「PR 出して」「プルリク」「Draft PR」「push して PR」で起動
 argument-hint: "[target-branch]"
 allowed-tools: [Bash, Read, Grep, Glob]
 ---
