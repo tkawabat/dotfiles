@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Enable the systemd user ssh-agent so a single agent persists across shells
+# for the whole boot. Re-runs when the unit file changes (chezmoi run_onchange).
+# unit hash: {{ include "dot_config/systemd/user/ssh-agent.service" | sha256sum }}
+set -euo pipefail
+
+# systemd --user が使えない環境 (macOS 等) では何もしない。
+if ! command -v systemctl >/dev/null 2>&1; then
+  exit 0
+fi
+if ! systemctl --user show-environment >/dev/null 2>&1; then
+  exit 0
+fi
+
+systemctl --user daemon-reload
+systemctl --user enable --now ssh-agent.service

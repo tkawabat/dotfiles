@@ -19,4 +19,8 @@ path=(
   /usr/local/bin
   $path
 )
+
+# systemd user サービス (dot_config/systemd/user/ssh-agent.service) が管理する
+# 常駐 ssh-agent を全シェルで共有する。パスフレーズ入力は起動ごとに1回で済む。
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/ssh-agent.socket"
 {{- end }}
