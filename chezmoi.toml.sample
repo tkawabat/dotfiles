@@ -35,3 +35,24 @@ extra_forbidden_prefix_rules = []
 # enabled = false
 # ''']
 extra_config_toml_blocks = []
+
+[data.claude]
+# Claude Code の allow / ask / deny に、この端末でだけ追記したいルール
+# 例:
+# extra_allow_permissions = ["Bash(terraform plan:*)"]
+extra_allow_permissions = []
+extra_ask_permissions = []
+extra_deny_permissions = []
+
+# 自動モード (auto mode) の分類器に渡す、この端末の環境コンテキスト。
+# ここに書いた行が settings.json の autoMode.environment に "$defaults" と並んで入る。
+# 空リストなら autoMode ブロック自体を出力しない（= 素のデフォルト）。
+# 分類器は自然言語として読むので、新入りエンジニアに環境を説明する調子で書く。
+# 例:
+# extra_auto_mode_environment = [
+#   '''Organization: Example Inc. Primary use of Claude Code: software development.''',
+#   '''Source control: GitHub org github.com/example-org and all repos under it.''',
+#   '''Trusted internal domains: *.internal.example.com''',
+#   '''Sensitive remote targets: any host or namespace whose name contains prod/production.''',
+# ]
+extra_auto_mode_environment = []
