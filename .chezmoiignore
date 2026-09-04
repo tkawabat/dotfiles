@@ -30,6 +30,8 @@ CLAUDE.md
 !.claude/skills/parallel-code-review/SKILL.md
 !.claude/skills/pr-comment-reply/
 !.claude/skills/pr-comment-reply/SKILL.md
+!.claude/skills/interview-dev-loop/
+!.claude/skills/interview-dev-loop/SKILL.md
 !.claude/commands/
 !.claude/commands/pr-comment-triage.md
 !.claude/commands/grill-me.md
