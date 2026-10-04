@@ -32,6 +32,10 @@ CLAUDE.md
 !.claude/skills/pr-comment-reply/SKILL.md
 !.claude/skills/interview-dev-loop/
 !.claude/skills/interview-dev-loop/SKILL.md
+!.claude/skills/dev-interview/
+!.claude/skills/dev-interview/SKILL.md
+!.claude/skills/dev-loop/
+!.claude/skills/dev-loop/SKILL.md
 !.claude/commands/
 !.claude/commands/pr-comment-triage.md
 !.claude/commands/grill-me.md
