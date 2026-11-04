@@ -8,3 +8,5 @@ Host *
     UseKeychain yes
 {{- end }}
     IdentityFile ~/.ssh/id_ed25519
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
