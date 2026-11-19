@@ -212,6 +212,7 @@ prefix_rule(pattern=["rm", "-rf", "/"], decision="forbidden")
 prefix_rule(pattern=["rm", "-rf", "/Users"], decision="forbidden")
 prefix_rule(pattern=["rm", "-rf", "~"], decision="forbidden")
 prefix_rule(pattern=["rm", "-rf", "~/"], decision="forbidden")
+prefix_rule(pattern=["security", "find-generic-password"], decision="forbidden")
 prefix_rule(pattern=["sudo"], decision="forbidden")
 
 # 追加コマンド
