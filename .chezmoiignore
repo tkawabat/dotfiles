@@ -39,6 +39,8 @@ CLAUDE.md
 !.claude/commands/
 !.claude/commands/pr-comment-triage.md
 !.claude/commands/grill-me.md
+!.claude/hooks/
+!.claude/hooks/split-excluded-commands.py
 
 {{- if eq .chezmoi.os "darwin" }}
 # systemd は Linux 専用。macOS には unit を配置しない。
