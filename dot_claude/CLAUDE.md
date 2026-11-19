@@ -11,7 +11,7 @@
 
 ## コマンドの実行時の注意
 
-- Bash で sandbox の `excludedCommands`（git / gh / docker / mise / pnpm / npm / chezmoi）を実行するときは、`cd ... &&` や `;` で前に別のコマンドをつながない。
+- Bash で sandbox の `excludedCommands`（git / gh / docker / mise / pnpm / npm / chezmoi / agent-browser）を実行するときは、`cd ... &&` や `;` で前に別のコマンドをつながない。
   - つなぐとサンドボックスの中で動き、gh の TLS 検証などが失敗する。
   - ディレクトリは `git -C <dir>`、`gh -R <owner/repo>`、`pnpm -C <dir>` で指定する。
 
