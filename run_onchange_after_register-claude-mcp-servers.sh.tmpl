@@ -2,7 +2,7 @@
 # Register MCP servers for Claude Code at user scope.
 # Re-runs when this file's hash changes (chezmoi run_onchange).
 #
-# Notion / Atlassian (Jira / Confluence) は OAuth ベースの remote MCP。
+# Notion は OAuth ベースの remote MCP。
 # 初回登録後、`claude` 内で `/mcp` を実行してブラウザ認証を行う必要がある。
 set -euo pipefail
 
@@ -14,7 +14,6 @@ fi
 # remote servers: name|transport|url
 servers=(
   "notion|sse|https://mcp.notion.com/sse"
-  "atlassian|http|https://mcp.atlassian.com/v1/mcp"
 )
 
 # stdio servers: name|command[|arg1|arg2|...]
@@ -25,9 +24,11 @@ stdio_servers=()
 existing="$(claude mcp list 2>/dev/null || true)"
 
 # 旧設定で登録済みだが現在は管理対象外になった MCP サーバーを除去する。
-# 例: playwright (agent-browser に移行済み)
+# playwright: agent-browser に移行済み
+# atlassian: claude.ai の Atlassian コネクタと重複するため
 obsolete_servers=(
   "playwright"
+  "atlassian"
 )
 for name in "${obsolete_servers[@]}"; do
   if printf '%s\n' "$existing" | grep -q "^${name}:"; then
@@ -37,7 +38,6 @@ for name in "${obsolete_servers[@]}"; do
 done
 
 # 既存登録の URL が宣言と食い違う場合は削除して再登録させる
-# (例: Atlassian の SSE → Streamable HTTP 移行)。
 for entry in "${servers[@]}"; do
   IFS='|' read -r name transport url <<<"$entry"
   line="$(printf '%s\n' "$existing" | grep "^${name}:" || true)"
