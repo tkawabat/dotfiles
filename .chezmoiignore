@@ -36,9 +36,8 @@ CLAUDE.md
 !.claude/skills/dev-interview/SKILL.md
 !.claude/skills/dev-loop/
 !.claude/skills/dev-loop/SKILL.md
-!.claude/commands/
-!.claude/commands/pr-comment-triage.md
-!.claude/commands/grill-me.md
+!.claude/skills/pr-comment-triage/
+!.claude/skills/pr-comment-triage/SKILL.md
 !.claude/hooks/
 !.claude/hooks/split-excluded-commands.py
 
